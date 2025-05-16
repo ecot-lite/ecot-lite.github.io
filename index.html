@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>ECoT-Lite: Training Strategies for Efficient Embodied Reasoning</title>
+  <meta name="description" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning">
+  <meta name="keywords" content="ECoT-Lite">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta property="og:title" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning">
+  <!-- <meta property="og:image" content="https://embodied-cot.github.io/images/ecot_teaser/ecot_teaser-1.png" /> -->
+  <!-- todo -->
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1082" />
+  <meta property="og:image:height" content="639" />
+  <meta property="og:url" content="https://embodied-cot.github.io" />
+  <meta property="og:description" content="Project page for ECoT-Lite" />
+  <meta name="twitter:title" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning" />
+  <meta name="twitter:description" content="Project page for ECoT-Lite" />
+  <!-- <meta name="twitter:image" content="https://embodied-cot.github.io/images/ecot_teaser/ecot_teaser-1.png" /> -->
+
+  <!-- Google Tag Manager -->
+  <script>(function (w, d, s, l, i) {
+      w[l] = w[l] || []; w[l].push({
+        'gtm.start':
+          new Date().getTime(), event: 'gtm.js'
+      }); var f = d.getElementsByTagName(s)[0],
+        j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+          'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+    })(window, document, 'script', 'dataLayer', 'GTM-PFJ2DFW');</script>
+  <!-- End Google Tag Manager -->
+  <!-- <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script> -->
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/vlmaps_icon.svg">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+
+<body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PFJ2DFW" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">ECoT-Lite: Training Strategies for Efficient Embodied Reasoning
+            </h1>
+            <div class="is-size-5 publication-authors">
+
+              <span class="author-block">
+                <a href="https://verityw.github.io/">William Chen</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="">Suneel Belkhale</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="">Suvir Mirchandani</a><sup>2</sup>,</span>
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://www.oiermees.com/">Oier Mees</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="">Danny Driess</a><sup>3</sup>,</span>
+              <span class="author-block">
+                <a href="https://kpertsch.github.io/">Karl Pertsch</a><sup>1</sup>,</span>
+              <span class="author-block">
+                <a href="https://people.eecs.berkeley.edu/~svlevine/">Sergey Levine</a><sup>1</sup>,
+              </span>
+            </div>
+
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>UC Berkeley,</span>
+              <span class="author-block"><sup>2</sup>Stanford University,</span>
+              <span class="author-block"><sup>3</sup>Physical Intelligence</span>
+            </div>
+
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block"> <!-- TODO -->
+                  <a href="https://arxiv.org/abs/2505.08243" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+
+                <!-- Video Link. -->
+                <!-- TODO 
+                <span class="link-block"> 
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span> -->
+
+                <!-- Code Link.
+                <span class="link-block">
+                  <a href="" class="external-link button is-normal is-rounded is-dark">
+                <span class="icon">
+                  <i class="fab fa-github"></i>
+                </span>
+                <span>Code (Coming Soon!)</span>
+                </a>
+                </span> -->
+
+                <!-- Colab Link.
+                <span class="link-block">
+                  <a href="https://colab.research.google.com/drive/1CzRKin3T9dl-4HYBVtuULrIskpVNHoAH?usp=sharing"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <img src="static/images/colab_logo.svg" />
+                    </span>
+                    <span>Colab</span>
+                  </a>
+                </span> -->
+
+                <!-- Model Link.
+                <span class="link-block">
+                  <a href="https://huggingface.co/Embodied-CoT"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <img src="static/images/hf_icon.svg" />
+                    </span>
+                    <span>Models</span>
+                  </a>
+                </span> -->
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="hero teaser">
+    <div class="container is-max-desktop">
+      <div class="hero-body">
+        <video id="teaser" autoplay controls muted loop playsinline height="100%">
+          <source src="static/videos/ECoT_Lite_Website.mp4" type="video/mp4">
+        </video>
+
+        <img src="static/images/Teaser/Teaser-1.png" />
+
+        <h2 class="subtitle has-text-centered">
+          ECoT-Lite enjoys the performance benefits of emboedied reasoning without the test-time computational cost.
+        </h2>
+
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Robot chain-of-thought reasoning (CoT)—wherein a model predicts helpful intermediate representations
+              before choosing actions—provides an effective method for improving the generalization and performance
+              of robot policies, especially vision-language-action models (VLAs). While such approaches have been shown
+              to improve performance and generalization, they suffer from core limitations, like needing specialized
+              robot reasoning data and slow inference speeds. To design new robot reasoning approaches that address
+              these issues, a more complete characterization of why reasoning helps policy performance is critical. We
+              hypothesize several mechanisms by which robot reasoning improves policies: (1) better representation
+              learning, (2) improved learning curricularization, and (3) increased expressivity. We then devise simple
+              variants of robot CoT reasoning to isolate and test each one. We find that learning to generate reasonings
+              does lead to better VLA representations, while attending to the reasonings aids in actually leveraging
+              these features for improved action prediction. Our results provide us with a better understanding of why
+              CoT reasoning helps VLAs, which we use to introduce two simple and lightweight alternative recipes for
+              robot reasoning. Our proposed approaches achieve significant performance gains over non-reasoning
+              policies, state-of-the-art results on the LIBERO-90 benchmark, and a 3x inference speedup compared to
+              standard robot reasoning.
+            </p>
+          </div>
+        </div>
+      </div>
+
+
+  </section>
+
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+
+
+
+        <div class="column is-full-width">
+
+
+          <h2 class="title is-3">Why Does Reasoning Improve Policy Performance?</h2>
+          <div class="content has-text-justified has-text-centered">
+
+            <h3 class="title is-4">Hypotheses</h3>
+            <p>
+              To develop better embodied robot reasoning methods, we first need to understand <i>why</i> reasoning helps
+              robot policies in the first place. We present three hypotheses for why this might be the case:
+            </p>
+
+            <div class="content has-text-justified">
+              <ul>
+                <li><span style="color:rgb(204, 85, 0)"><b>Hyp. 1: Better Representation Learning.</b></span> The
+                  reasoning contains task-relevant features, so learning to reason embeds this information in the
+                  model's representations, even if reasonings are not generated at test time.</li>
+                <li><span style="color:rgb(102, 153, 204)"><b>Hyp. 2: Improved Learning Curricularization.</b></span>
+                  Having reasonings in-context during training indicates the important features for choosing actions,
+                  which must otherwise be learned from scratch.</li>
+                <li><span style="color:rgb(135, 170, 107)"><b>Hyp. 3: Increased Expressivity.</b></span> More test-time
+                  in-context tokens improves the model's expressivity, even if the tokens lack semantic meaning.</li>
+              </ul>
+            </div>
+
+          </div>
+          <div class="content has-text-justified has-text-centered">
+
+            <h3 class="title is-4">Policy Variants</h3>
+            <img src="static/images/PolicyVariants/PolicyVariants-1.png" />
+            <p style="text-align: center;"><small>Schematic illustrating all policy variants for testing our three
+                hypotheses.</small></p>
+
+            <p>
+              We create simple variants of Embodied Chain-of-Thought Reasoning (ECoT) to isolate and test each of these
+              hypotheses:
+            </p>
+
+            <div class="content has-text-justified">
+              <ul>
+                <li><span style="color:rgb(204, 85, 0)"><b>Reasoning Pre-training and Co-training:</b></span> Rather
+                  than learning to generate reasonings and actions in the same context, the policy can be trained on
+                  reasonings and actions separately.
+                  <ul>
+                    <li>In <b>pre-training</b>, the policy is first trained exclusively to reason, then fine-tuned
+                      exclusively on actions.</li>
+                    <li>In <b>co-training</b>, the policy is trained to reason and act in separate datapoints within the
+                      same batch.</li>
+                  </ul>
+                </li>
+                <li><span style="color:rgb(204, 85, 0)"><b>Reasoning Dropout:</b></span> The model is trained to
+                  generate reasonings and actions in sequence (as with standard ECoT), but the reasonings are randomly
+                  dropped out. At test time, the reasonings can be turned on and off as needed.</li>
+                <li><span style="color:rgb(102, 153, 204)"><b>Reasoning Scaffolding:</b></span>
+                  The policy has reasonings in-context during training, but no loss is assigned to it (the policy cannot
+                  generate reasonings, only attend to it). This is akin to teacher-student learning, wherein the policy
+                  access "oracle" features during training only.</li>
+                <li><span style="color:rgb(135, 170, 107)"><b>Thinking Tokens:</b></span> The policy's expressivity is
+                  improved by adding many meaningless "thinking" tokens. Such approaches have been used in <a
+                    href="https://arxiv.org/abs/2404.15758">other</a> <a
+                    href="https://arxiv.org/abs/2310.02226">domains</a>
+                  too.</li>
+              </ul>
+
+
+            </div>
+          </div>
+        </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Experiments and Results</h2>
+
+          <div class="content has-text-justified has-text-centered">
+
+            <img src="static/images/ResultsPlot/ResultsPlot-1.png" />
+            <p style="text-align: center;"><small>Our ECoT-Lite policies outperform standard VLAs in both simulation and
+                real-world evaluations, while being significantly faster than standard ECoT.</small></p>
+            <p>
+              We train VLAs using all the above recipes, as well as both an ECoT and standard (non-reasoning) VLA
+              baseline (all using the <a href="https://ai.stanford.edu/blog/minivla/">MiniVLA architecture and
+                codebase</a>). We evaluate all these policies on the <a
+                href="https://libero-project.github.io/main.html">LIBERO-90</a> simulated manipulation benchmark. We
+              find that the most performant variants are <span style="color:rgb(204, 85, 0)"><b>reasoning
+                  dropout</b></span> and <span style="color:rgb(204, 85, 0)"><b>reasoning pre-training</b></span>, which
+              we call <b>ECoT-Lite</b>. We then reproduce and validate these approaches with <a
+                href="https://openvla.github.io/">OpenVLA-based</a> policies on real-world Bridge WidowX manipulation
+              tasks.
+            </p>
+          </div>
+          <div class="content has-text-justified has-text-centered">
+
+            <h3 class="title is-4">LIBERO-90 Experiments</h3>
+
+            <p>
+              We find that both full ECoT and our <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span>
+              policy achieve the best performance on LIBERO-90 (90.8% and 89.4% respectively), <b>slightly outperforming
+                <a href="https://arxiv.org/abs/2407.15840">past state-of-the-art</a> (88.6%)</b>. The <span
+                style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> policy comes close (87.1%) as well.
+              Notably, both these methods do not produce test-time reasonings, making them much faster than ECoT. While
+              <span style="color:rgb(204, 85, 0)"><b>reasoning co-training</b></span> is less effective (84.2%), it
+              nonetheless outperforms the non-reasoning standard VLA baseline (82.0%). This all strongly supports <span
+                style="color:rgb(204, 85, 0)"><b>Hyp. 1</b></span>.
+            </p>
+            <p>
+              We also find that <span style="color:rgb(102, 153, 204)"><b>reasoning scaffolding</b></span> performs
+              comparably to co-training (84.1%), in weak support of <span style="color:rgb(102, 153, 204)"><b>Hyp.
+                  2</b></span>. However, <span style="color:rgb(135, 170, 107)"><b>thinking tokens</b></span> performs
+              <i>worse</i> than the standard VLA (78.9 - 79.8%), which is evidence against <span
+                style="color:rgb(135, 170, 107)"><b>Hyp. 3</b></span>. This suggests expanded expressivity is not
+              helpful for robot reasoning (even when using a small 1B parameter MiniVLA), and that the reasoning tokens
+              must be meaningful to be useful.
+            </p>
+
+            <p>
+              These analyses are repeated in harder variants of the LIBERO-90 benchmark, wherein we perturb the task
+              objects' starting locations and add distractors. The above trends hold for these challenge splits as well.
+            </p>
+          </div>
+
+          <div class="content has-text-justified has-text-centered">
+
+            <h3 class="title is-4">Bridge Experiments</h3>
+
+            <p>
+              We find that <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> and <span
+                style="color:rgb(204, 85, 0)"><b>reasoning pre-training</b></span> are effective for real-world
+              manipulation tasks conducted in the Bridge WidowX environment as well. As with LIBERO, both approaches
+              similarly improve over the standard BC recipe while being around 3x faster than ECoT.
+            </p>
+
+            <img src="static/images/FailureModes/FailureModes-1.png" />
+            <p style="text-align: center;"><small>Many of the common failure modes of the <span
+                  style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> policy in Bridge seem to be fixed by
+                having test-time reasonings.</small></p>
+
+            <p>
+              Curiously, <span style="color:rgb(204, 85, 0)"><b>reasoning pre-training</b></span> is <i>more</i>
+              performant than <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> in Bridge, reversing
+              the trend seen in LIBERO. We suspect this is because <span style="color:rgb(204, 85, 0)"><b>reasoning
+                  dropout</b></span>t is more effective in narrower domains; many of said policy's failure modes seem to
+              be intuitively solved by "turning on" test-time reasonings.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column is-full-width">
+          <h2 class="title is-3">Which Robot Reasoning Approach is Best for My Problem?</h2>
+
+          <div class="content has-text-justified has-text-centered">
+            <p>
+              Based on our findings, we make <b>prescriptions</b> for when to use each of the above robot reasoning
+              approaches.
+            </p>
+            <p>
+              Standard <b>Embodied Chain-of-Thought Reasoning</b> policies are the most performant, but they are
+              significantly slower than the other approaches. They are best for tasks where performance is critical and
+              speed is not a concern. As both ECoT-Lite strategies do not generate test-time reasonings, they are
+              equally fast as standard VLA policies.
+            </p>
+            <p>
+              <span style="color:rgb(204, 85, 0)"><b>Reasoning pre-training</b></span> seems more effective in diverse
+              domains. As the approach involves tuning on just reasonings and just actions separately, it also does not
+              require <i>paired</i> embodied reasoning data. However, by needing to train on these tasks sequentially,
+              it needs more consecutive gradient steps to expose the policy to an equal amount of reasoning and action
+              data.
+            </p>
+            <p>
+              Finally, <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> seems more performant in
+              narrow domains. Additionally, its training recipe is almost identical to standard ECoT (the only
+              difference is that reasonings are occasionally dropped during training). Thus, they allow users to turn
+              test-time reasonings off and on as needed.
+            </p>
+          </div>
+
+
+        </div>
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <section class="section" id="BibTeX">
+    <div class="container is-max-desktop content">
+      <h2 class="title">BibTeX</h2>
+      <pre><code> @article{Chen25-ecot-lite,
+    title={Training Strategies for Efficient Embodied Reasoning},
+    author={William Chen and Suneel Belkhale and Suvir Mirchandani and Oier Mees and Danny Driess and Karl Pertsch and Sergey Levine},
+    year={2025}
+} </code></pre>
+    </div>
+  </section>
+
+
+
+
+
+  <footer class="footer">
+    <div class="container">
+      <div class="content has-text-centered">
+        <a class="icon-link" href="https://arxiv.org/pdf/2407.08693.pdf">
+          <i class="fas fa-file-pdf"></i>
+        </a>
+        <a class="icon-link" href="" class="external-link" disabled>
+          <i class="fab fa-github"></i>
+        </a>
+      </div>
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content">
+            <p> Website borrowed from <a href="https://github.com/nerfies/nerfies.github.io">NeRFies</a> under a <a
+                href="https://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0
+                International</a>
+            </p>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
