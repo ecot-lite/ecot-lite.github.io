@@ -3,13 +3,13 @@
 
 <head>
   <meta charset="utf-8">
-  <title>ECoT-Lite: Training Strategies for Efficient Embodied Reasoning</title>
-  <meta name="description" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning">
+  <title>Training Strategies for Efficient Embodied Reasoning</title>
+  <meta name="description" content="Training Strategies for Efficient Embodied Reasoning">
   <meta name="keywords" content="ECoT-Lite">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta property="og:title" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning">
+  <meta property="og:title" content="Training Strategies for Efficient Embodied Reasoning">
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning">
+  <meta property="og:site_name" content="Training Strategies for Efficient Embodied Reasoning">
   <!-- <meta property="og:image" content="https://embodied-cot.github.io/images/ecot_teaser/ecot_teaser-1.png" /> -->
   <!-- todo -->
   <meta property="og:image:type" content="image/png" />
@@ -17,7 +17,7 @@
   <meta property="og:image:height" content="639" />
   <meta property="og:url" content="https://embodied-cot.github.io" />
   <meta property="og:description" content="Project page for ECoT-Lite" />
-  <meta name="twitter:title" content="ECoT-Lite: Training Strategies for Efficient Embodied Reasoning" />
+  <meta name="twitter:title" content="Training Strategies for Efficient Embodied Reasoning" />
   <meta name="twitter:description" content="Project page for ECoT-Lite" />
   <!-- <meta name="twitter:image" content="https://embodied-cot.github.io/images/ecot_teaser/ecot_teaser-1.png" /> -->
 
@@ -72,7 +72,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">ECoT-Lite: Training Strategies for Efficient Embodied Reasoning
+            <h1 class="title is-1 publication-title">Training Strategies for Efficient Embodied Reasoning
             </h1>
             <div class="is-size-5 publication-authors">
 
@@ -174,7 +174,7 @@
         <img src="static/images/Teaser/Teaser-1.png" />
 
         <h2 class="subtitle has-text-centered">
-          ECoT-Lite enjoys the performance benefits of emboedied reasoning without the test-time computational cost.
+          ECoT-Lite enjoys the performance benefits of embodied reasoning without the test-time computational cost.
         </h2>
 
 
@@ -196,15 +196,17 @@
               to improve performance and generalization, they suffer from core limitations, like needing specialized
               robot reasoning data and slow inference speeds. To design new robot reasoning approaches that address
               these issues, a more complete characterization of why reasoning helps policy performance is critical. We
-              hypothesize several mechanisms by which robot reasoning improves policies: (1) better representation
-              learning, (2) improved learning curricularization, and (3) increased expressivity. We then devise simple
-              variants of robot CoT reasoning to isolate and test each one. We find that learning to generate reasonings
-              does lead to better VLA representations, while attending to the reasonings aids in actually leveraging
-              these features for improved action prediction. Our results provide us with a better understanding of why
-              CoT reasoning helps VLAs, which we use to introduce two simple and lightweight alternative recipes for
-              robot reasoning. Our proposed approaches achieve significant performance gains over non-reasoning
-              policies, state-of-the-art results on the LIBERO-90 benchmark, and a 3x inference speedup compared to
-              standard robot reasoning.
+              hypothesize several mechanisms by which robot reasoning improves policies:
+              <span style="color:rgb(204, 85, 0)">(1) better representation learning</span>,
+              <span style="color:rgb(102, 153, 204)">(2) improved learning curricularization</span>, and
+              <span style="color:rgb(135, 170, 107)">(3) increased expressivity</span>. We then devise
+              simple variants of robot CoT reasoning to isolate and test each one. We find that learning to generate
+              reasonings does lead to better VLA representations, while attending to the reasonings aids in actually
+              leveraging these features for improved action prediction. Our results provide us with a better
+              understanding of why CoT reasoning helps VLAs, which we use to introduce two simple and lightweight
+              alternative recipes for robot reasoning. Our proposed approaches achieve significant performance gains
+              over non-reasoning policies, state-of-the-art results on the LIBERO-90 benchmark, and a 3x inference
+              speedup compared to standard robot reasoning.
             </p>
           </div>
         </div>
@@ -234,13 +236,13 @@
 
             <div class="content has-text-justified">
               <ul>
-                <li><span style="color:rgb(204, 85, 0)"><b>Hyp. 1: Better Representation Learning.</b></span> The
+                <li><span style="color:rgb(204, 85, 0)"><b>Hyp. 1: Better Representation Learning:</b></span> The
                   reasoning contains task-relevant features, so learning to reason embeds this information in the
                   model's representations, even if reasonings are not generated at test time.</li>
-                <li><span style="color:rgb(102, 153, 204)"><b>Hyp. 2: Improved Learning Curricularization.</b></span>
+                <li><span style="color:rgb(102, 153, 204)"><b>Hyp. 2: Improved Learning Curricularization:</b></span>
                   Having reasonings in-context during training indicates the important features for choosing actions,
                   which must otherwise be learned from scratch.</li>
-                <li><span style="color:rgb(135, 170, 107)"><b>Hyp. 3: Increased Expressivity.</b></span> More test-time
+                <li><span style="color:rgb(135, 170, 107)"><b>Hyp. 3: Increased Expressivity:</b></span> More test-time
                   in-context tokens improves the model's expressivity, even if the tokens lack semantic meaning.</li>
               </ul>
             </div>
@@ -363,7 +365,7 @@
               Curiously, <span style="color:rgb(204, 85, 0)"><b>reasoning pre-training</b></span> is <i>more</i>
               performant than <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> in Bridge, reversing
               the trend seen in LIBERO. We suspect this is because <span style="color:rgb(204, 85, 0)"><b>reasoning
-                  dropout</b></span>t is more effective in narrower domains; many of said policy's failure modes seem to
+                  dropout</b></span> is more effective in narrower domains; many of said policy's failure modes seem to
               be intuitively solved by "turning on" test-time reasonings.
             </p>
           </div>
