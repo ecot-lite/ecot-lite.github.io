@@ -224,6 +224,26 @@
 
         <div class="column is-full-width">
 
+          <h2 class="title is-3">TLDR and Takeaways</h2>
+          <div class="content has-text-justified has-text-centered">
+
+            <ul>
+              <li>We test various hypotheses of <i>why</i> embodied chain-of-thought reasoning (ECoT) improves robot
+                policy performance to extract insights for developing better robot reasoning approaches.</li>
+              <li>Our results mainly support the hypothesis that reasoning <span
+                  style="color:rgb(204, 85, 0)"><b>improves representation learning</b></span>. This contrasts with the
+                <a href="https://arxiv.org/abs/2305.15408">expressivity arguments</a> usually made for why reasoning
+                helps LLMs.
+              </li>
+              <li>We introduce two approaches for learning representations from reasonings without producing them at
+                test time, which we call <b>ECoT-Lite</b>. We validate their effectiveness in the LIBERO simulator and
+                real-world Bridge manipulation tasks.</li>
+              <li>We find <b>ECoT-Lite</b> is faster than standard ECoT while being more performant
+                than standard VLAs (even slightly surpassing state-of-the-art performance in LIBERO).</li>
+            </ul>
+
+          </div>
+
 
           <h2 class="title is-3">Why Does Reasoning Improve Policy Performance?</h2>
           <div class="content has-text-justified has-text-centered">
@@ -323,11 +343,16 @@
               We find that both full ECoT and our <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span>
               policy achieve the best performance on LIBERO-90 (90.8% and 89.4% respectively), <b>slightly outperforming
                 <a href="https://arxiv.org/abs/2407.15840">past state-of-the-art</a> (88.6%)</b>. The <span
-                style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> policy comes close (87.1%) as well.
-              Notably, both these methods do not produce test-time reasonings, making them much faster than ECoT. While
-              <span style="color:rgb(204, 85, 0)"><b>reasoning co-training</b></span> is less effective (84.2%), it
-              nonetheless outperforms the non-reasoning standard VLA baseline (82.0%). This all strongly supports <span
-                style="color:rgb(204, 85, 0)"><b>Hyp. 1</b></span>.
+                style="color:rgb(204, 85, 0)"><b>reasoning pre-training</b></span> policy comes close (87.1%) as well.
+              Notably, both these methods do not produce test-time reasonings, making them much faster than ECoT.
+            </p>
+            <p>
+              In contrast, <span style="color:rgb(204, 85, 0)"><b>reasoning co-training</b></span> is less effective
+              than these two approaches (84.2%), even though it likewise learns representations from reasonings. This
+              suggests that not all representation learning approaches are equally conducive for positive transfer
+              between the reasoning and action prediction tasks. Nevertheless, <span style="color:rgb(204, 85, 0)"><b>
+                  co-training</b></span> outperforms the non-reasoning standard VLA baseline (82.0%). This
+              all strongly supports <span style="color:rgb(204, 85, 0)"><b>Hyp. 1</b></span>.
             </p>
             <p>
               We also find that <span style="color:rgb(102, 153, 204)"><b>reasoning scaffolding</b></span> performs
@@ -366,7 +391,9 @@
               performant than <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> in Bridge, reversing
               the trend seen in LIBERO. We suspect this is because <span style="color:rgb(204, 85, 0)"><b>reasoning
                   dropout</b></span> is more effective in narrower domains; many of said policy's failure modes seem to
-              be intuitively solved by "turning on" test-time reasonings.
+              be intuitively solved by "turning on" test-time reasonings. However, <span
+                style="color:rgb(204, 85, 0)"><b>reasoning pre-training</b></span> maintains good generalization
+              performance; it matches or outperforms standard ECoT in all but one semantic generalization Bridge task.
             </p>
           </div>
 
@@ -391,21 +418,26 @@
             <p>
               Standard <b>Embodied Chain-of-Thought Reasoning</b> policies are the most performant, but they are
               significantly slower than the other approaches. They are best for tasks where performance is critical and
-              speed is not a concern. As both ECoT-Lite strategies do not generate test-time reasonings, they are
-              equally fast as standard VLA policies.
+              speed is not a concern.
+            </p>
+            <p>
+              <i><b>As both ECoT-Lite strategies do not generate test-time reasonings, they
+                  are much faster, matching the inference speeds of standard VLA policies.</b></i>
             </p>
             <p>
               <span style="color:rgb(204, 85, 0)"><b>Reasoning pre-training</b></span> seems more effective in diverse
-              domains. As the approach involves tuning on just reasonings and just actions separately, it also does not
-              require <i>paired</i> embodied reasoning data. However, by needing to train on these tasks sequentially,
-              it needs more consecutive gradient steps to expose the policy to an equal amount of reasoning and action
-              data.
+              domains&#151; it matches or surpasses the semantic generalization capabilities of ECoT in
+              all but one Bridge task. As the approach involves tuning on just reasonings and just actions separately,
+              it also does not require <i>paired</i> embodied reasoning data. However, by needing to train on these
+              tasks sequentially, it needs more consecutive gradient steps to expose the policy to an equal amount of
+              reasoning and action data.
             </p>
             <p>
               Finally, <span style="color:rgb(204, 85, 0)"><b>reasoning dropout</b></span> seems more performant in
-              narrow domains. Additionally, its training recipe is almost identical to standard ECoT (the only
-              difference is that reasonings are occasionally dropped during training). Thus, they allow users to turn
-              test-time reasonings off and on as needed.
+              narrow domains, like LIBERO (where it matches full ECoT and surpasses state-of-the-art performance).
+              Additionally, its training recipe is almost identical to standard ECoT (the only difference is that
+              reasonings are occasionally dropped during training). Thus, they allow users to turn test-time reasonings
+              off and on as needed.
             </p>
           </div>
 
